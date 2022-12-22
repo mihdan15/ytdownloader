@@ -22,6 +22,14 @@ def main():
         elif option == 'lowest_resolution':
             yt.streams.get_highest_resolution().download()
 
+
+        # Muat file ke dalam memori
+        file_data = BytesIO()
+        yt.download(output_stream=file_data)
+
+        # Unduh file dari memori ke disk
+        st.download_file(file_data.getvalue(), f"{yt.title}.mp4")
+
     if st.button("view"):
         st.video(link)
 
